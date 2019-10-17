@@ -2,25 +2,19 @@
 
 namespace App\Controller;
 
-
-use FOS\RestBundle\Controller\AbstractFOSRestController;
-
 use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\View\View;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use FOS\RestBundle\Controller\FOSRestController;
 use Swagger\Annotations as SWG;
-use Zmaglica\RickAndMortyApiWrapper\RickAndMortyApiWrapper;
 
 class EpisodeController extends BaseApiController
 {
-
     /**
      * List all characters from given episode id
+     *
+     * @QueryParam(name="page", strict=true, nullable=true, requirements="\d+", default="1", description="Page of the request.")
+     *
      * @SWG\Parameter(
      *     in="query",
      *     type="number",
@@ -38,14 +32,15 @@ class EpisodeController extends BaseApiController
      *
      * @Rest\Get("/api/episode/{id}/character/")
      *
-     * @param Request $request
+     * @param ParamFetcher $paramFetcher
      * @param int $id
      * @return View
      */
-    public function getAllCharactersFromGivenEpisode(Request $request, int $id)
+    public function getAllCharactersFromGivenEpisode(ParamFetcher $paramFetcher, int $id)
     {
-        $page = (int)($request->query->get('page') ?? 1);
+        $page = $paramFetcher->get('page');
         $characters = $this->rickAndMortyApi->episode()->setPage($page)->getCharacters($id);
+
         return $this->view($characters->toArray(), $characters->getResponseStatusCode());
     }
 }

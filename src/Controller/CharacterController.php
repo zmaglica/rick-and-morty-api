@@ -2,24 +2,22 @@
 
 namespace App\Controller;
 
-
-use FOS\RestBundle\Controller\AbstractFOSRestController;
-
 use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\View\View;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use FOS\RestBundle\Controller\FOSRestController;
 use Swagger\Annotations as SWG;
-use Zmaglica\RickAndMortyApiWrapper\RickAndMortyApiWrapper;
 
 class CharacterController extends BaseApiController
 {
     /**
      * List all characters from given dimension
+     *
+     * @QueryParam(name="dimension", strict=true, nullable=false, description="Dimension name")
+     * @QueryParam(name="page", strict=true, nullable=true, requirements="\d+", default="1", description="Page of the request.")
+     *
+     *
      * @SWG\Parameter(
      *     in="query",
      *     type="number",
@@ -48,14 +46,15 @@ class CharacterController extends BaseApiController
      *
      * @Rest\Get("/api/character/dimension")
      *
-     * @param Request $request
+     * @param ParamFetcher $paramFetcher
      * @return View
      */
-    public function getAllCharactersFromGivenDimension(Request $request)
+    public function getAllCharactersFromGivenDimension(ParamFetcher $paramFetcher)
     {
-        $dimension = $request->query->get('dimension');
-        $page = (int)($request->query->get('page') ?? 1);
+        $dimension = $paramFetcher->get('dimension');
+        $page = $paramFetcher->get('page');
         $characters = $this->rickAndMortyApi->location()->setPage($page)->whereDimension($dimension)->getResidents();
+
         return $this->view($characters->toArray(), $characters->getResponseStatusCode());
     }
 
@@ -69,14 +68,13 @@ class CharacterController extends BaseApiController
      *
      * @Rest\Get("/api/character/statistics")
      *
-     * @param Request $request
      * @return View
      */
-    public function getCharacterStatistic(Request $request)
+    public function getCharacterStatistic()
     {
         $characterApi = $this->rickAndMortyApi->character();
         $statistic = [
-            "total" => [
+            'total' => [
                 'status' => [
                     'alive' => $characterApi->isAlive()->get()->count(),
                     'dead' => $characterApi->isDead()->get()->count(),
@@ -87,12 +85,12 @@ class CharacterController extends BaseApiController
                     'male' => $characterApi->isMale()->get()->count(),
                     'genderLess' => $characterApi->isGenderless()->get()->count(),
                     'genderUnknown' => $characterApi->isGenderUnknown()->get()->count(),
-                ]
-            ]
+                ],
+            ],
         ];
+
         return $this->view($statistic);
     }
-
 
     /**
      * Get character details
@@ -104,21 +102,20 @@ class CharacterController extends BaseApiController
      *
      * @Rest\Get("/api/character/{id}")
      *
-     * @param Request $request
      * @param int $id
      * @return View
      */
-    public function getCharacter(Request $request, int $id)
+    public function getCharacter(int $id)
     {
         $characters = $this->rickAndMortyApi->character()->get($id);
-        if ($characters->hasErrors())
-        {
+        if ($characters->hasErrors()) {
             return $this->view($characters->toArray(), $characters->getResponseStatusCode());
         }
         $character = $characters->toArray();
-        $character["origin"] = $characters->getOrigins()->toArray();
-        $character["location"] = $characters->getLocations()->toArray();
-        $character["episodes"] = $characters->getEpisodes()->toArray();
+        $character['origin'] = $characters->getOrigins()->toArray();
+        $character['location'] = $characters->getLocations()->toArray();
+        $character['episodes'] = $characters->getEpisodes()->toArray();
+
         return $this->view($character);
     }
 }
