@@ -20,36 +20,10 @@ class ApiController extends AbstractFOSRestController
 {
     private $rickAndMortyApi;
 
-    public function __construct()
+    public function __construct(RickAndMortyApiWrapper $rickAndMortyApi)
     {
-        $this->rickAndMortyApi = new RickAndMortyApiWrapper();
+        $this->rickAndMortyApi = $rickAndMortyApi;
 
-    }
-
-    /**
-     * Get character details
-     * @SWG\Response(
-     *     response="404",
-     *     description="API Request URL doesn't exist"
-     * )
-     *
-     * @Rest\Get("/api/character/{id}")
-     *
-     * @param Request $request
-     * @param int $id
-     * @return View
-     */
-    public function getCharacter(Request $request, int $id)
-    {
-        $characters = $this->rickAndMortyApi->character()->get($id);
-        if ($characters->hasErrors()) {
-            return $this->view($characters->toArray(), $characters->getResponseStatusCode());
-        }
-        $character = $characters->toArray();
-        $character["origin"] = $characters->getOrigins()->toArray();
-        $character["location"] = $characters->getLocations()->toArray();
-        $character["episodes"] = $characters->getEpisodes()->toArray();
-        return $this->view($character);
     }
 
 
@@ -191,5 +165,65 @@ class ApiController extends AbstractFOSRestController
         $page = (int)($request->query->get('page') ?? 1);
         $characters = $this->rickAndMortyApi->episode()->setPage($page)->getCharacters($id);
         return $this->view($characters->toArray(), $characters->getResponseStatusCode());
+    }
+
+    /**
+     * Get character statistic (total alive, dead, unknown status characters, total female, male, genderless and unknown gender characters
+     * @SWG\Response(
+     *     response="404",
+     *     description="API Request URL doesn't exist"
+     * )
+     *
+     * @Rest\Get("/api/character/statistic")
+     *
+     * @param Request $request
+     * @return View
+     */
+    public function getCharacterStatistic(Request $request)
+    {
+        $characterApi = $this->rickAndMortyApi->character();
+        $statistic = [
+            "total" => [
+                'status' => [
+                    'alive' => $characterApi->isAlive()->get()->count(),
+                    'dead' => $characterApi->isDead()->get()->count(),
+                    'unknown' => $characterApi->isStatusUnknown()->get()->count(),
+                ],
+                'gender' => [
+                    'female' => $characterApi->isFemale()->get()->count(),
+                    'male' => $characterApi->isMale()->get()->count(),
+                    'genderLess' => $characterApi->isGenderless()->get()->count(),
+                    'genderUnknown' => $characterApi->isGenderUnknown()->get()->count(),
+                ]
+            ]
+        ];
+        return $this->view($statistic);
+    }
+
+    /**
+     * Get character details
+     * @SWG\Response(
+     *     response="404",
+     *     description="API Request URL doesn't exist"
+     * )
+     *
+     * @Rest\Get("/api/character/{id}")
+     *
+     * @param Request $request
+     * @param int $id
+     * @return View
+     */
+    public function getCharacter(Request $request, int $id)
+    {
+        $characters = $this->rickAndMortyApi->character()->get($id);
+        if ($characters->hasErrors())
+        {
+            return $this->view($characters->toArray(), $characters->getResponseStatusCode());
+        }
+        $character = $characters->toArray();
+        $character["origin"] = $characters->getOrigins()->toArray();
+        $character["location"] = $characters->getLocations()->toArray();
+        $character["episodes"] = $characters->getEpisodes()->toArray();
+        return $this->view($character);
     }
 }

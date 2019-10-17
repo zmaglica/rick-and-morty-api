@@ -8,7 +8,7 @@
             "ref": "cb4152ebcadbe620ea2261da1a1c5a9b8cea7672"
         },
         "files": [
-            "./config/routes/annotations.yaml"
+            "config/routes/annotations.yaml"
         ]
     },
     "doctrine/inflector": {
@@ -32,7 +32,7 @@
             "ref": "cad41ef93d6150067ae2bb3c7fd729492dff6f0a"
         },
         "files": [
-            "./config/packages/fos_rest.yaml"
+            "config/packages/fos_rest.yaml"
         ]
     },
     "guzzlehttp/guzzle": {
@@ -98,9 +98,9 @@
             "ref": "384cec52df45f3bfd46a09930d6960a58872b268"
         },
         "files": [
-            "./config/packages/dev/jms_serializer.yaml",
-            "./config/packages/jms_serializer.yaml",
-            "./config/packages/prod/jms_serializer.yaml"
+            "config/packages/dev/jms_serializer.yaml",
+            "config/packages/jms_serializer.yaml",
+            "config/packages/prod/jms_serializer.yaml"
         ]
     },
     "nelmio/api-doc-bundle": {
@@ -112,8 +112,8 @@
             "ref": "c8e0c38e1a280ab9e37587a8fa32b251d5bc1c94"
         },
         "files": [
-            "./config/packages/nelmio_api_doc.yaml",
-            "./config/routes/nelmio_api_doc.yaml"
+            "config/packages/nelmio_api_doc.yaml",
+            "config/routes/nelmio_api_doc.yaml"
         ]
     },
     "phpdocumentor/reflection-common": {
@@ -161,8 +161,8 @@
             "ref": "482d233eb8de91ebd042992077bbd5838858890c"
         },
         "files": [
-            "./bin/console",
-            "./config/bootstrap.php"
+            "bin/console",
+            "config/bootstrap.php"
         ]
     },
     "symfony/debug": {
@@ -195,7 +195,7 @@
             "ref": "dc3fc2e0334a4137c47cfd5a3ececc601fa61a0b"
         },
         "files": [
-            "./.env"
+            ".env"
         ]
     },
     "symfony/framework-bundle": {
@@ -207,14 +207,14 @@
             "ref": "61ad963f28c091b8bb9449507654b9c7d8bbb53c"
         },
         "files": [
-            "./config/bootstrap.php",
-            "./config/packages/cache.yaml",
-            "./config/packages/framework.yaml",
-            "./config/packages/test/framework.yaml",
-            "./config/services.yaml",
-            "./public/index.php",
-            "./src/Controller/.gitignore",
-            "./src/Kernel.php"
+            "config/bootstrap.php",
+            "config/packages/cache.yaml",
+            "config/packages/framework.yaml",
+            "config/packages/test/framework.yaml",
+            "config/services.yaml",
+            "public/index.php",
+            "src/Controller/.gitignore",
+            "src/Kernel.php"
         ]
     },
     "symfony/http-foundation": {
@@ -256,10 +256,10 @@
             "ref": "4c107a8d23a16b997178fbd4103b8d2f54f688b7"
         },
         "files": [
-            "./config/packages/dev/routing.yaml",
-            "./config/packages/routing.yaml",
-            "./config/packages/test/routing.yaml",
-            "./config/routes.yaml"
+            "config/packages/dev/routing.yaml",
+            "config/packages/routing.yaml",
+            "config/packages/test/routing.yaml",
+            "config/routes.yaml"
         ]
     },
     "symfony/security-core": {
@@ -286,9 +286,9 @@
             "ref": "369b5b29dc52b2c190002825ae7ec24ab6f962dd"
         },
         "files": [
-            "./config/packages/twig.yaml",
-            "./config/routes/dev/twig.yaml",
-            "./templates/base.html.twig"
+            "config/packages/twig.yaml",
+            "config/routes/dev/twig.yaml",
+            "templates/base.html.twig"
         ]
     },
     "symfony/var-dumper": {
@@ -316,6 +316,6 @@
         "version": "2.0.14"
     },
     "zmaglica/rick-and-morty-api-wrapper": {
-        "version": "1.0.0.x-dev"
+        "version": "v1.0.2"
     }
 }

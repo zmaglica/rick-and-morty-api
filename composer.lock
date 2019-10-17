@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a9b26bb85bcac260445c865ad1bbc764",
+    "content-hash": "cbede7656687d5817f0e80e1b36a9d94",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -4483,12 +4483,17 @@
         },
         {
             "name": "zmaglica/rick-and-morty-api-wrapper",
-            "version": "1.0.0.x-dev",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zmaglica/rick-and-morty-api-wrapper.git",
+                "reference": "6edf912db06e0fba10c32e9fdad65560164a54c1"
+            },
             "dist": {
-                "type": "path",
-                "url": "../rick-and-morty-api-wrapper",
-                "reference": "d36b3df9c75535e586ff56d6ed74176b2fd51070",
-                "shasum": null
+                "type": "zip",
+                "url": "https://api.github.com/repos/zmaglica/rick-and-morty-api-wrapper/zipball/6edf912db06e0fba10c32e9fdad65560164a54c1",
+                "reference": "6edf912db06e0fba10c32e9fdad65560164a54c1",
+                "shasum": ""
             },
             "require": {
                 "ext-json": "*",
@@ -4505,25 +4510,7 @@
                     "Zmaglica\\RickAndMortyApiWrapper\\": "src"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Zmaglica\\RickAndMortyApiWrapper\\Tests\\": "tests"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "vendor/bin/phpunit"
-                ],
-                "test-coverage": [
-                    "vendor/bin/phpunit --coverage-html coverage"
-                ],
-                "lint": [
-                    "php-cs-fixer fix --diff --dry-run"
-                ],
-                "fix": [
-                    "php-cs-fixer fix"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -4540,9 +4527,7 @@
                 "rick-and-morty-api-wrapper",
                 "zmaglica"
             ],
-            "transport-options": {
-                "symlink": true
-            }
+            "time": "2019-10-16T12:05:03+00:00"
         }
     ],
     "packages-dev": [
@@ -4625,9 +4610,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "zmaglica/rick-and-morty-api-wrapper": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
