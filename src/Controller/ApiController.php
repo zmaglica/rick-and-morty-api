@@ -28,46 +28,6 @@ class ApiController extends AbstractFOSRestController
 
 
     /**
-     * List all characters from given dimension
-     * @SWG\Parameter(
-     *     in="query",
-     *     type="number",
-     *     minimum="1",
-     *     name="page",
-     *     description="Page number",
-     *     default="1"
-     * )
-     * @SWG\Parameter(
-     *     in="query",
-     *     type="string",
-     *     name="dimension",
-     *     description="Dimension name",
-     *     required=true,
-     *     @SWG\Schema(
-     *          type="string",
-     *          example="Dimension C-137"
-     *    )
-     * )
-     *
-     * @SWG\Response(
-     *     response="404",
-     *     description="API Request URL doesn't exist"
-     * )
-     *
-     * @Rest\Get("/api/character/dimension")
-     *
-     * @param Request $request
-     * @return View
-     */
-    public function getAllCharactersFromGivenDimension(Request $request)
-    {
-        $dimension = $request->query->get('dimension');
-        $page = (int)($request->query->get('page') ?? 1);
-        $characters = $this->rickAndMortyApi->location()->setPage($page)->whereDimension($dimension)->getResidents();
-        return $this->view($characters->toArray(), $characters->getResponseStatusCode());
-    }
-
-    /**
      * List all characters from given location id
      * @SWG\Parameter(
      *     in="query",
@@ -168,6 +128,46 @@ class ApiController extends AbstractFOSRestController
     }
 
     /**
+     * List all characters from given dimension
+     * @SWG\Parameter(
+     *     in="query",
+     *     type="number",
+     *     minimum="1",
+     *     name="page",
+     *     description="Page number",
+     *     default="1"
+     * )
+     * @SWG\Parameter(
+     *     in="query",
+     *     type="string",
+     *     name="dimension",
+     *     description="Dimension name",
+     *     required=true,
+     *     @SWG\Schema(
+     *          type="string",
+     *          example="Dimension C-137"
+     *    )
+     * )
+     *
+     * @SWG\Response(
+     *     response="404",
+     *     description="API Request URL doesn't exist"
+     * )
+     *
+     * @Rest\Get("/api/character/dimension")
+     *
+     * @param Request $request
+     * @return View
+     */
+    public function getAllCharactersFromGivenDimension(Request $request)
+    {
+        $dimension = $request->query->get('dimension');
+        $page = (int)($request->query->get('page') ?? 1);
+        $characters = $this->rickAndMortyApi->location()->setPage($page)->whereDimension($dimension)->getResidents();
+        return $this->view($characters->toArray(), $characters->getResponseStatusCode());
+    }
+
+    /**
      * Get character statistic (total alive, dead, unknown status characters, total female, male, genderless and unknown gender characters
      * @SWG\Response(
      *     response="404",
@@ -199,6 +199,7 @@ class ApiController extends AbstractFOSRestController
         ];
         return $this->view($statistic);
     }
+
 
     /**
      * Get character details
