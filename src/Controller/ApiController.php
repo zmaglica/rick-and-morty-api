@@ -40,7 +40,7 @@ class ApiController extends AbstractFOSRestController
      *
      * @SWG\Response(
      *     response="404",
-     *     description="API Request URL doesn't exist"
+     *     description="Data not found or API endpoint doesn't exist"
      * )
      *
      * @Rest\Get("/api/location/{id}/character/")
@@ -81,7 +81,7 @@ class ApiController extends AbstractFOSRestController
      *
      * @SWG\Response(
      *     response="404",
-     *     description="API Request URL doesn't exist"
+     *     description="Data not found or API endpoint doesn't exist"
      * )
      *
      * @Rest\Get("/api/location/character/")
@@ -111,7 +111,7 @@ class ApiController extends AbstractFOSRestController
      *
      * @SWG\Response(
      *     response="404",
-     *     description="API Request URL doesn't exist"
+     *     description="Data not found or API endpoint doesn't exist"
      * )
      *
      * @Rest\Get("/api/episode/{id}/character/")
@@ -151,7 +151,7 @@ class ApiController extends AbstractFOSRestController
      *
      * @SWG\Response(
      *     response="404",
-     *     description="API Request URL doesn't exist"
+     *     description="Data not found or API endpoint doesn't exist"
      * )
      *
      * @Rest\Get("/api/character/dimension")
@@ -171,7 +171,7 @@ class ApiController extends AbstractFOSRestController
      * Get character statistic (total alive, dead, unknown status characters, total female, male, genderless and unknown gender characters
      * @SWG\Response(
      *     response="404",
-     *     description="API Request URL doesn't exist"
+     *     description="Data not found or API endpoint doesn't exist"
      * )
      *
      * @Rest\Get("/api/character/statistic")
@@ -205,7 +205,7 @@ class ApiController extends AbstractFOSRestController
      * Get character details
      * @SWG\Response(
      *     response="404",
-     *     description="API Request URL doesn't exist"
+     *     description="Data not found or API endpoint doesn't exist"
      * )
      *
      * @Rest\Get("/api/character/{id}")
