@@ -82,7 +82,7 @@ class CharacterController extends BaseApiController
     public function getCharacterStatistic()
     {
         $characterApi = $this->rickAndMortyApi->character();
-        $statistic = [
+        $statistics = [
             'total' => [
                 'status' => [
                     'alive' => $characterApi->clear()->isAlive()->get()->count(),
@@ -97,8 +97,9 @@ class CharacterController extends BaseApiController
                 ],
             ],
         ];
+        $statistics['total']['count'] = array_sum(array_values($statistics['total']['status']));
 
-        return $this->view($statistic);
+        return $this->view($statistics);
     }
 
     /**
