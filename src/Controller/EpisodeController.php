@@ -23,7 +23,10 @@ class EpisodeController extends BaseApiController
      *     description="Page number",
      *     default="1"
      * )
-     *
+     * @SWG\Response(
+     *     response="400",
+     *     description="Bad request"
+     * )
      * @SWG\Response(
      *     response="404",
      *     description="Data not found or API endpoint doesn't exist"

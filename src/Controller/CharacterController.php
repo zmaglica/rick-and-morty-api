@@ -39,6 +39,10 @@ class CharacterController extends BaseApiController
      * )
      *
      * @SWG\Response(
+     *     response="400",
+     *     description="Bad request"
+     * )
+     * @SWG\Response(
      *     response="404",
      *     description="Data not found or API endpoint doesn't exist"
      * )
@@ -60,6 +64,11 @@ class CharacterController extends BaseApiController
 
     /**
      * Get character statistics (total alive, dead, unknown status characters, total female, male, genderless and unknown gender characters
+     *
+     * @SWG\Response(
+     *     response="400",
+     *     description="Bad request"
+     * )
      * @SWG\Response(
      *     response="404",
      *     description="Data not found or API endpoint doesn't exist"
@@ -76,15 +85,15 @@ class CharacterController extends BaseApiController
         $statistic = [
             'total' => [
                 'status' => [
-                    'alive' => $characterApi->isAlive()->get()->count(),
-                    'dead' => $characterApi->isDead()->get()->count(),
+                    'alive' => $characterApi->clear()->isAlive()->get()->count(),
+                    'dead' => $characterApi->clear()->isDead()->get()->count(),
                     'unknown' => $characterApi->isStatusUnknown()->get()->count(),
                 ],
                 'gender' => [
-                    'female' => $characterApi->isFemale()->get()->count(),
-                    'male' => $characterApi->isMale()->get()->count(),
-                    'genderLess' => $characterApi->isGenderless()->get()->count(),
-                    'genderUnknown' => $characterApi->isGenderUnknown()->get()->count(),
+                    'female' => $characterApi->clear()->isFemale()->get()->count(),
+                    'male' => $characterApi->clear()->isMale()->get()->count(),
+                    'genderLess' => $characterApi->clear()->isGenderless()->get()->count(),
+                    'genderUnknown' => $characterApi->clear()->isGenderUnknown()->get()->count(),
                 ],
             ],
         ];
@@ -94,6 +103,11 @@ class CharacterController extends BaseApiController
 
     /**
      * Get character details
+     *
+     * @SWG\Response(
+     *     response="400",
+     *     description="Bad request"
+     * )
      * @SWG\Response(
      *     response="404",
      *     description="Data not found or API endpoint doesn't exist"
